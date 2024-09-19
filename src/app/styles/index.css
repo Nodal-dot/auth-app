@@ -1,0 +1,15 @@
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100vh
+}
+
+#root {
+  height: 100vh
+}
+
+.App {
+  height: 100vh;
+}

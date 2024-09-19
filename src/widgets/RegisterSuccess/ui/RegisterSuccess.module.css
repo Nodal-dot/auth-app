@@ -1,0 +1,13 @@
+.successTitle{
+    font-weight: 600;
+    line-height: 46px;
+}
+
+.successMessage{
+    line-height: 24px;
+}
+
+.resendButton{
+    margin-top: 48px ;
+
+}

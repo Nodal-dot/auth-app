@@ -1,0 +1,29 @@
+
+.imageBlock {
+    flex-basis: 50%;
+    transition: margin 0.5s;
+}
+
+.imageWrapper {
+    display: flex;
+    height: 100%;
+}
+
+.image {
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    width: 100%;
+}
+
+.authContainer {
+    flex-basis: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.authBlock{
+    width: 340px;
+}

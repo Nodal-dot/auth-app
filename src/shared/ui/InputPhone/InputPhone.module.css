@@ -1,0 +1,14 @@
+.inputPhone {
+    font-size: 16px;
+    height: 53px;
+    padding: 8px 12px;
+    border: 1px solid #C0C6D1;
+    border-radius: 5px;
+}
+.inputPhone:hover {
+    border-color: #3452B4;
+}
+
+.inputPhone:focus {
+    border-color: #3452B4;
+}

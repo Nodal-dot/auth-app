@@ -1,0 +1,27 @@
+.checkboxContainer {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 16px;
+}
+
+.textForm {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+    text-align: left;
+    margin-left:  12px;
+}
+
+.textHighlight{
+    color: #3452B4;
+}
+
+.textHighlight:hover{
+    color: #3452B4;
+    text-decoration: underline;
+}
+
+.textHighlight:active{
+    color: #1E378B;
+}
