@@ -7,3 +7,9 @@
     margin-bottom: 8px;
     cursor: default;
 }
+
+@media (height <= 600px) {
+    .label {
+        margin-bottom: 0;
+    }
+}

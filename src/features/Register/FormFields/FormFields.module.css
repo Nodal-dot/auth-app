@@ -2,7 +2,8 @@
     position: relative;
     display: flex;
     flex-direction: column;
-    margin-bottom: 40px;
+    margin-bottom: 40px
+
 }
 
 .field:last-child{
@@ -21,5 +22,36 @@
 }
 
 .fields {
-    margin-bottom: 40px;
+    margin-bottom: 40px
+}
+
+@media (height <= 800px) {
+    .field {
+        margin-bottom: 30px;
+    }
+
+    .fields {
+        margin-bottom: 30px;
+    }
+}
+
+@media (height <= 600px) {
+    .field {
+        margin-bottom: 20px;
+    }
+
+    .fields {
+        margin-bottom: 20px;
+    }
+}
+
+@media (height <= 400px) {
+    .field {
+        margin-bottom: 15px;
+
+    }
+
+    .fields {
+        margin-bottom: 15px;
+    }
 }
