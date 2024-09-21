@@ -18,3 +18,9 @@
 .button:active{
     background-color: #5B76CF;
 }
+
+.button:disabled{
+    pointer-events: none;
+    background-color: #E1E4EB;
+    color: #8B8F98;
+}

@@ -4,11 +4,12 @@ import {classNames} from "../../lib/classNames.ts";
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
     className?: string
+    isActive?:boolean
 }
 export const Button: FC<ButtonProps> = (props) => {
-    const { className, children, ...otherProps } = props
+    const { className, children,isActive, ...otherProps } = props
     return (
-        <button {...otherProps} className={classNames(cls.button, {},[className!])}>
+        <button disabled={!isActive} {...otherProps} className={classNames(cls.button, {},[className!])}>
             {children}
         </button>
     )

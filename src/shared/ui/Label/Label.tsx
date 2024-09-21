@@ -1,5 +1,5 @@
 import {memo} from 'react'
-import './Label.css'
+import cls from './Label.module.css'
 
 interface LabelProps {
     text: string;
@@ -9,7 +9,7 @@ interface LabelProps {
 export const Label = memo((props: LabelProps) => {
     const { text, htmlFor } = props
     return (
-        <label className={"label"} htmlFor={htmlFor}>
+        <label className={cls.label} htmlFor={htmlFor}>
             {text}
         </label>
     )

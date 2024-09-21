@@ -23,6 +23,13 @@ const useFormFields = (formData: FormData[], handleClick: () => void) => {
         if (item?.type === 'email' && !/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(value)) {
             return 'Это поле должно содержать действительный email';
         }
+        if (item?.type === 'password') {
+            const password1 = currentValues['password1'];
+            const password2 = currentValues['password2'];
+            if (password1 && password2 && password1 !== password2) {
+                return 'Пароли не совпадают';
+            }
+        }
         return '';
     };
 

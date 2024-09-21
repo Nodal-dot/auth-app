@@ -19,7 +19,7 @@ const FormFields: FC<FormFieldsProps> = ({ selectValues, handleSelectChange, fie
         <div className={cls.fields}>
             {fields.map((field) => (
                 <div className={cls.field} key={field.name}>
-                    <Label htmlFor={field.name} text={field.label} />
+                    <Label  htmlFor={field.name} text={field.label} />
                     {field.type === 'select' ? (
                         <Select
                             options={field.options ?? []}

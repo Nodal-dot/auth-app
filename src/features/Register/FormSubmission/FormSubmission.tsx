@@ -1,10 +1,16 @@
 import {Button} from "../../../shared/ui/Button/Button.tsx";
 import cls from './FormSubmission.module.css'
 import {FC} from "react";
-const FormSubmission: FC = () => {
+
+interface FormSubmissionProps {
+    isActive: boolean
+}
+
+const FormSubmission: FC<FormSubmissionProps> = (props) => {
+    const {isActive} = props
     return (
         <div className={cls.submit}>
-            <Button type="submit">РЕГИСТРАЦИЯ</Button>
+            <Button isActive={isActive} type="submit">РЕГИСТРАЦИЯ</Button>
         </div>
     );
 };

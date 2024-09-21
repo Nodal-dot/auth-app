@@ -6,7 +6,8 @@ interface PhoneInputProps {
     onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
     name: string;
 }
-const PhoneInput: FC<PhoneInputProps> = ({  className,onChange, name }) => {
+const PhoneInput: FC<PhoneInputProps> = (props) => {
+    const {  className,onChange, name } = props
     const [value, setValue] = useState('');
 
     const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {

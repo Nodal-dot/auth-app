@@ -21,23 +21,23 @@ const data:FormData[] = [
         "name": "email"
     },
     {
-        "type": "password1",
+        "type": "password",
         "label": "Ваш пароль",
         "name": "password1",
         "required": true,
     },
     {
-        "type":"password2",
+        "type":"password",
         "label":'Повторите пароль',
         "name":"password2",
         "required": true,
     },
-    {
-        "type":"phone",
-        "label":'Телефон',
-        "name":"phone",
-        "required": true,
-    },
+    // {
+    //     "type":"phone",
+    //     "label":'Телефон',
+    //     "name":"phone",
+    //     "required": true,
+    // },
     {
         "type": "select",
         "label": "Выберите пункт из списка",
@@ -77,7 +77,7 @@ const RegisterPage: FunctionComponent = () => {
         setTimeout(() => {
             setIsSubmitting(false);
             setIsRegistered(true);
-        }, 10000);
+        }, 2000);
     };
 
     return (
