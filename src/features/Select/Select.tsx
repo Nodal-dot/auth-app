@@ -1,9 +1,9 @@
 import type {MouseEventHandler} from "react";
 import {useEffect, useRef, useState} from "react";
-import ArrowUpSVG from '../../assets/svg/Vector.svg?react'
-import ArrowDownSVG from '../../assets/svg/Vector1.svg?react'
+import ArrowUpSVG from '../../shared/assets/svg/Vector.svg?react'
+import ArrowDownSVG from '../../shared/assets/svg/Vector1.svg?react'
 import cls from "./Select.module.css";
-import {classNames} from "../../lib/classNames";
+import {classNames} from "../../shared/lib/classNames.ts";
 
 export type Option = {
     title: string;

@@ -1,9 +1,9 @@
 import {ChangeEvent, FC} from 'react';
 import {Input} from "../../../shared/ui/Input/Input.tsx";
-import {Select} from "../../../shared/ui/Select/Select.tsx";
+import {Select} from "../../Select/Select.tsx";
 import {Label} from "../../../shared/ui/Label/Label.tsx";
 import cls from './FormFields.module.css'
-import {Errors, FormData, SelectValues} from "../types.ts";
+import {Errors, FormData, SelectValues} from "../../../shared/types/register/types.ts";
 import PhoneInput from "../../../shared/ui/InputPhone/InputPhone.tsx";
 
 interface FormFieldsProps {

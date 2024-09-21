@@ -2,7 +2,7 @@ import {FormCheckbox, FormFields, FormSubmission} from "../../../features/Regist
 import {FC, useState} from "react";
 import useFormFields from "../../../features/Register/useFormFields.ts";
 import cls from './RegisterForm.module.css'
-import {FormData} from "../../../features/Register/types.ts";
+import {FormData} from "../../../shared/types/register/types.ts";
 
 interface RegisterFormProps {
     handleClick: () => void;

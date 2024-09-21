@@ -1,3 +1,8 @@
 .submit {
     display: flex;
 }
+@media (width <= 760px) {
+    .submit {
+        justify-content: center;
+    }
+}

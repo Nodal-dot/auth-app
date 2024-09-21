@@ -1,4 +1,4 @@
-import {Option} from "../../shared/ui/Select/Select.tsx";
+import {Option} from "../../../features/Select/Select.tsx";
 
 
 export interface FormData {

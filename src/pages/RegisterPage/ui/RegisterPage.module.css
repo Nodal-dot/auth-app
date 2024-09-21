@@ -27,7 +27,8 @@
 }
 
 .authBlock{
-    display: flex;
+    height: 100%;
+    display: grid;
     width: 340px;
     justify-content: center;
 }
@@ -38,8 +39,15 @@
     height: 100vh;
 }
 
-@media (height <= 740px) {
-    .authBlock {
-        height: 100%;
-    }
+@media (width <= 760px) {
+   .authPage {
+       flex-direction: column;
+   }
+   .imageWrapper{
+       flex-basis: 15%;
+       height: 0;
+   }
+   .contentContainer{
+       flex-basis: 85%;
+   }
 }
