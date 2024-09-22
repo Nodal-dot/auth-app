@@ -1,6 +1,7 @@
 
 .ldsRing,
 .ldsRing div {
+    align-self: center;
     box-sizing: border-box;
 }
 

@@ -43,10 +43,12 @@
    .authPage {
        flex-direction: column;
    }
+
    .imageWrapper{
        flex-basis: 15%;
        height: 0;
    }
+
    .contentContainer{
        flex-basis: 85%;
    }

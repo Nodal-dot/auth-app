@@ -1,14 +1,14 @@
 import { ChangeEvent, FormEvent, useState } from 'react';
-import { FormData, SelectValues } from './types.ts';
-interface CurrentValues {
-    [key: string]: string;
-}
-const useFormFields = (formData: FormData[], handleClick: () => void) => {
+import {CurrentValues, FormData, SelectValues} from '../../shared/types/register/types.ts';
+
+const useFormFields = (formData: FormData[], handleClick: (data:CurrentValues) => void,userInputValues:CurrentValues ) => {
     const [fields, ] = useState(formData);
     const [selectValues, setSelectValues] = useState<SelectValues>({});
     const [errors, setErrors] = useState({});
-    const [currentValues, setCurrentValues] = useState<CurrentValues>(() =>
-        formData.reduce((acc, item) => ({ ...acc, [item.name]: '' }), {})
+    const [currentValues, setCurrentValues] = useState<CurrentValues>(
+        userInputValues && Object.keys(userInputValues).length > 0
+            ? userInputValues
+            : formData.reduce((acc, item) => ({ ...acc, [item.name]: '' }), {})
     );
     const selectFields = formData.filter(item => item.type === 'select').map(item => item.name);
 
@@ -63,14 +63,21 @@ const useFormFields = (formData: FormData[], handleClick: () => void) => {
 
         setErrors(newErrors);
         if (!hasErrors) {
-            handleClick();
+            for (const key in selectValues) {
+                currentValues[key] = selectValues[key].value;
+            }
+            handleClick(currentValues);
         }
     }
 
     const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
         const { name, value } = event.target;
         const error = checkRequired(name, value);
-        setErrors({ ...errors, [name]: error });
+        if (!error) {
+            setErrors({ ...errors, [name]: '' });
+        } else {
+            setErrors({ ...errors, [name]: error });
+        }
         setCurrentValues({ ...currentValues, [name]: value });
     };
 

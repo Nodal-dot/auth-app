@@ -16,3 +16,6 @@ export interface Errors {
 export interface SelectValues {
     [key: string]: Option;
 }
+export interface CurrentValues {
+    [key: string]: string;
+}

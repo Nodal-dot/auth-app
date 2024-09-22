@@ -11,11 +11,8 @@ export enum InputTheme {
 
 interface InputProps extends HTMLInputProps {
     theme?: InputTheme
-    name?: string
-    type?: string;
-    placeholder?: string
-    id?:string
     className?: string
+    value?:string
 }
 
 const themeClasses = {
@@ -23,14 +20,10 @@ const themeClasses = {
     [InputTheme.OUTLINE]: cls.outline,
 }
 export const Input = memo((props: InputProps) => {
-    const { placeholder,theme = InputTheme.OUTLINE,className, type = 'text',onBlur, onChange,name} = props
+    const { theme = InputTheme.OUTLINE,value,className,...otherProps} = props
     return (
-        <input className={classNames(cls.input,{},[themeClasses[theme],className!])}
-               type={type}
-               placeholder={placeholder}
-               onChange={onChange}
-               name={name}
-               onBlur={onBlur}
+        <input value={value} className={classNames(cls.input,{},[themeClasses[theme],className!])}
+               {...otherProps}
         />
     )
 })

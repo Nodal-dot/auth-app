@@ -3,8 +3,9 @@ import {Input} from "../../../shared/ui/Input/Input.tsx";
 import {Select} from "../../Select/Select.tsx";
 import {Label} from "../../../shared/ui/Label/Label.tsx";
 import cls from './FormFields.module.css'
-import {Errors, FormData, SelectValues} from "../../../shared/types/register/types.ts";
+import {CurrentValues, Errors, FormData, SelectValues} from "../../../shared/types/register/types.ts";
 import PhoneInput from "../../../shared/ui/InputPhone/InputPhone.tsx";
+import Icon from '../../../shared/assets/svg/Vector (2).svg?react'
 
 interface FormFieldsProps {
     fields: FormData[];
@@ -12,9 +13,11 @@ interface FormFieldsProps {
     handleChange: (event: ChangeEvent<HTMLInputElement>)=> void
     handleSelectChange : (name: string, value: string) => void
     selectValues:SelectValues
+    currentValues: CurrentValues;
 }
 
-const FormFields: FC<FormFieldsProps> = ({ selectValues, handleSelectChange, fields, errors, handleChange }) => {
+const FormFields: FC<FormFieldsProps> = (props) => {
+    const {selectValues, currentValues, handleSelectChange, fields, errors, handleChange} = props
     return (
         <div className={cls.fields}>
             {fields.map((field) => (
@@ -37,14 +40,19 @@ const FormFields: FC<FormFieldsProps> = ({ selectValues, handleSelectChange, fie
                             name={field.name}
                         />
                     ) : (
-                        <Input
-                            className={errors[field.name] ? cls.errorInput : ''}
-                            onChange={handleChange}
-                            onBlur={handleChange}
-                            placeholder={field.label}
-                            name={field.name}
-                            type={field.type}
-                        />
+                        <>
+                            <Input
+                                value={currentValues[field.name]}
+                                className={errors[field.name] ? cls.errorInput : (currentValues[field.name] ? cls.successInput : '')}
+                                onChange={handleChange}
+                                onBlur={handleChange}
+                                placeholder={field.label}
+                                name={field.name}
+                                type={field.type}
+                            />
+                            {currentValues[field.name] && !errors[field.name] && <Icon className={cls.successIcon}/>}
+                        </>
+
                     )}
                     {errors[field.name] && <div className={cls.error}>{errors[field.name]}</div>}
                 </div>

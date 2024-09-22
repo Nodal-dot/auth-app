@@ -17,6 +17,16 @@
     color: #E03A15;
 }
 
+.successInput {
+   border-color: #00A35F;
+}
+
+.successIcon{
+    position: absolute;
+    top: 57%;
+    right: 10px;
+}
+
 .errorInput {
     border-color :#E03A15;
 }

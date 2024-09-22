@@ -1,66 +1,22 @@
 import {FunctionComponent, useEffect, useState} from "react";
 import cls from './RegisterPage.module.css'
 import IMAGES from "../../../shared/assets/images/images.ts";
-import axios from 'axios';
-import MockAdapter from 'axios-mock-adapter';
 import {Spinner} from "../../../shared/ui/Spinner/Spinner.tsx";
-import {FormData} from '../../../features/Register/types.ts'
+import {CurrentValues, FormData} from '../../../shared/types/register/types.ts'
 import RegisterSuccess from "../../../widgets/RegisterSuccess/ui/RegisterSuccess.tsx";
 import {RegisterForm} from "../../../widgets/RegisterForm";
-const mock = new MockAdapter(axios);
-const data:FormData[] = [
-    {
-        "type": "string",
-        "label": "Ваш ФИО",
-        "required": true,
-        "name": "name"
-    },
-    {
-        "type": "email",
-        "label": "Ваш email",
-        "name": "email"
-    },
-    {
-        "type": "password",
-        "label": "Ваш пароль",
-        "name": "password1",
-        "required": true,
-    },
-    {
-        "type":"password",
-        "label":'Повторите пароль',
-        "name":"password2",
-        "required": true,
-    },
-    // {
-    //     "type":"phone",
-    //     "label":'Телефон',
-    //     "name":"phone",
-    //     "required": true,
-    // },
-    {
-        "type": "select",
-        "label": "Выберите пункт из списка",
-        "name": "select1",
-        "required":true,
-        "placeholder": "Выбор",
-        "options": [
-            { title: "Выбор1", value: "Выбор1" },
-            { title: "Выбор2", value: "Выбор2" }
-        ]
-    }
-]
+import {getFormData} from "../../../shared/api/register/registerFormApi.ts";
 
-mock.onGet('/api/form').reply(200, data);
 
 const RegisterPage: FunctionComponent = () => {
     const [formData, setFormData] = useState<FormData[]>([]);
     const [isLoaded, setIsLoaded] = useState(false);
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [isRegistered, setIsRegistered] = useState(false);
+    const [userInputValues, setUserInputValues] = useState<CurrentValues>({});
 
     useEffect(() => {
-        axios.get('/api/form')
+        getFormData()
             .then(response => {
                 if (response.status === 200) {
                     setFormData(response.data);
@@ -72,12 +28,13 @@ const RegisterPage: FunctionComponent = () => {
             });
     }, []);
 
-    const handleRegister = () => {
+    const handleRegister = (data:CurrentValues) => {
+        setUserInputValues(data);
         setIsSubmitting(true);
         setTimeout(() => {
             setIsSubmitting(false);
             setIsRegistered(true);
-        }, 2000);
+        }, 1000);
     };
 
     return (
@@ -87,29 +44,21 @@ const RegisterPage: FunctionComponent = () => {
                     <img className={cls.image} src={IMAGES.authImage} alt="auth-image"/>
                 </div>
             </div>
-
-            {isLoaded ? (
-                isSubmitting ? (
-                    <div className={cls.contentContainer}>
-                        <div className={cls.authBlock}>
-                            <Spinner/>
-                        </div>
+            {isLoaded && (
+                <div className={cls.contentContainer}>
+                    <div className={cls.authBlock}>
+                        {isSubmitting ? (
+                            <Spinner />
+                        ) : isRegistered ? (
+                            <RegisterSuccess onSendAgain={()=>{
+                                setIsSubmitting(false)
+                                setIsRegistered(false)
+                            }} />
+                        ) : (
+                            <RegisterForm userInputValues={userInputValues} handleClick={handleRegister} formData={formData} />
+                        )}
                     </div>
-                ) : isRegistered ? (
-                    <div className={cls.contentContainer}>
-                        <div className={cls.authBlock}>
-                            <RegisterSuccess/>
-                        </div>
-                    </div>
-                ) : (
-                    <div className={cls.contentContainer}>
-                        <div className={cls.authBlock}>
-                            <RegisterForm handleClick={handleRegister} formData={formData}/>
-                        </div>
-                    </div>
-                )
-            ) : (
-                <Spinner/>
+                </div>
             )}
         </div>
     );
