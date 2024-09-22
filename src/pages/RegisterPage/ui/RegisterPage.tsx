@@ -1,4 +1,4 @@
-import {FunctionComponent, useEffect, useState} from "react";
+import {FC, useEffect, useState} from "react";
 import cls from './RegisterPage.module.css'
 import IMAGES from "../../../shared/assets/images/images.ts";
 import {Spinner} from "../../../shared/ui/Spinner/Spinner.tsx";
@@ -7,8 +7,11 @@ import RegisterSuccess from "../../../widgets/RegisterSuccess/ui/RegisterSuccess
 import {RegisterForm} from "../../../widgets/RegisterForm";
 import {getFormData} from "../../../shared/api/register/registerFormApi.ts";
 
+interface RegisterPageProps {
+    showToast: (text:string)=> void
+}
 
-const RegisterPage: FunctionComponent = () => {
+const RegisterPage: FC<RegisterPageProps> = ({showToast}) => {
     const [formData, setFormData] = useState<FormData[]>([]);
     const [isLoaded, setIsLoaded] = useState(false);
     const [isSubmitting, setIsSubmitting] = useState(false);
@@ -32,6 +35,7 @@ const RegisterPage: FunctionComponent = () => {
         setUserInputValues(data);
         setIsSubmitting(true);
         setTimeout(() => {
+            showToast('Произошла ошибка!')
             setIsSubmitting(false);
             setIsRegistered(true);
         }, 1000);
