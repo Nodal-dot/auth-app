@@ -6,18 +6,25 @@ import {CurrentValues, FormData} from '../../../shared/types/register/types.ts'
 import RegisterSuccess from "../../../widgets/RegisterSuccess/ui/RegisterSuccess.tsx";
 import {RegisterForm} from "../../../widgets/RegisterForm";
 import {getFormData} from "../../../shared/api/register/registerFormApi.ts";
+import Toast from "../../../shared/ui/Toast/Toast.tsx";
 
-interface RegisterPageProps {
-    showToast: (text:string)=> void
-}
 
-const RegisterPage: FC<RegisterPageProps> = ({showToast}) => {
+
+const RegisterPage: FC = () => {
     const [formData, setFormData] = useState<FormData[]>([]);
+    const [isShown, setIsShown] = useState(false);
+    const [toastMessage, setToastMessage] = useState('');
     const [isLoaded, setIsLoaded] = useState(false);
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [isRegistered, setIsRegistered] = useState(false);
     const [userInputValues, setUserInputValues] = useState<CurrentValues>({});
-
+    const showToast = (message: string) => {
+        setToastMessage(message);
+        setIsShown(true);
+        setTimeout(() => {
+            setIsShown(false);
+        }, 3000);
+    };
     useEffect(() => {
         getFormData()
             .then(response => {
@@ -64,6 +71,7 @@ const RegisterPage: FC<RegisterPageProps> = ({showToast}) => {
                     </div>
                 </div>
             )}
+            {isShown && <Toast message={toastMessage} />}
         </div>
     );
 }

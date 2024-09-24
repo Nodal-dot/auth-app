@@ -1,5 +1,6 @@
 import cls from './Toast.module.css'
 import {FC} from "react";
+import {Portal} from "../Portal/Portal.tsx";
 interface ToastProps {
     message: string;
 }
@@ -7,11 +8,16 @@ interface ToastProps {
 const Toast: FC<ToastProps> = ( props) => {
     const {message} = props
     return (
-        <div className={cls.toast}>
-            <span className={cls.toastIcon}>i</span>
-            <span>{message}</span>
-        </div>
-    );
+
+        <Portal>
+            <div className={cls.toast}>
+                <span className={cls.toastIcon}>i</span>
+                <span>{message}</span>
+            </div>
+
+        </Portal>
+)
+    ;
 };
 
 export default Toast;
