@@ -5,8 +5,8 @@ import {Spinner} from "../../../shared/ui/Spinner/Spinner.tsx";
 import {CurrentValues, FormData} from '../../../shared/types/register/types.ts'
 import RegisterSuccess from "../../../widgets/RegisterSuccess/ui/RegisterSuccess.tsx";
 import {RegisterForm} from "../../../widgets/RegisterForm";
-import {getFormData} from "../../../shared/api/register/registerFormApi.ts";
 import Toast from "../../../shared/ui/Toast/Toast.tsx";
+import {getFormData, postFormData} from "../../../shared/api/register/register.ts";
 
 
 
@@ -41,11 +41,13 @@ const RegisterPage: FC = () => {
     const handleRegister = (data:CurrentValues) => {
         setUserInputValues(data);
         setIsSubmitting(true);
-        setTimeout(() => {
-            showToast('Произошла ошибка!')
+        postFormData(data).catch((reason)=>{
+            const {data} = reason.response
+            showToast(data)
+        }).finally(()=>{
             setIsSubmitting(false);
             setIsRegistered(true);
-        }, 1000);
+        })
     };
 
     return (

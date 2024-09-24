@@ -30,7 +30,7 @@ const FormFields: FC<FormFieldsProps> = (props) => {
                             onChange={(option) => {
                                 handleSelectChange(field.name, option);
                             }}
-                            className={errors[field.name] ? cls.errorInput : ''}
+                            className={errors[field.name] ? cls.errorInput : (currentValues[field.name] ? cls.successInput : '')}
                             placeholder={field.label}
                         />
                     ) : field.type === 'phone' ? (
