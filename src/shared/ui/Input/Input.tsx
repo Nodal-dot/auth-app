@@ -22,7 +22,7 @@ const themeClasses = {
 export const Input = memo((props: InputProps) => {
     const { theme = InputTheme.OUTLINE,value,className,...otherProps} = props
     return (
-        <input value={value} className={classNames(cls.input,{},[themeClasses[theme],className!])}
+        <input  value={value} className={classNames(cls.input,{},[themeClasses[theme],className!])}
                {...otherProps}
         />
     )

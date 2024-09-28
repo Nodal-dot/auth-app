@@ -9,7 +9,6 @@ import Toast from "../../../shared/ui/Toast/Toast.tsx";
 import {getFormData, postFormData} from "../../../shared/api/register.ts";
 
 
-
 const RegisterPage: FC = () => {
     const [formData, setFormData] = useState<FormData[]>([]);
     const [isShown, setIsShown] = useState(false);
@@ -38,15 +37,17 @@ const RegisterPage: FC = () => {
             });
     }, []);
 
-    const handleRegister = (data:CurrentValues) => {
+    const handleRegister = (data: CurrentValues) => {
         setUserInputValues(data);
         setIsSubmitting(true);
-        postFormData(data).catch((reason)=>{
-            const {data} = reason.response
-            showToast(data)
-        }).finally(()=>{
+        postFormData(data).then(()=>{
             setIsSubmitting(false);
             setIsRegistered(true);
+        }).catch((reason) => {
+            const {data} = reason.response
+            setIsLoaded(true)
+            setIsSubmitting(false);
+            showToast(data)
         })
     };
 
@@ -57,23 +58,28 @@ const RegisterPage: FC = () => {
                     <img className={cls.image} src={IMAGES.authImage} alt="auth-image"/>
                 </div>
             </div>
-            {isLoaded && (
-                <div className={cls.contentContainer}>
+            {
+                isLoaded ? <div className={cls.contentContainer}>
                     <div className={cls.authBlock}>
                         {isSubmitting ? (
-                            <Spinner />
+                            <Spinner/>
                         ) : isRegistered ? (
-                            <RegisterSuccess onSendAgain={()=>{
+                            <RegisterSuccess onSendAgain={() => {
                                 setIsSubmitting(false)
                                 setIsRegistered(false)
-                            }} />
+                            }}/>
                         ) : (
-                            <RegisterForm userInputValues={userInputValues} handleClick={handleRegister} formData={formData} />
+                            <RegisterForm userInputValues={userInputValues} handleClick={handleRegister}
+                                          formData={formData}/>
                         )}
                     </div>
+                </div> : <div className={cls.contentContainer}>
+                    <div className={cls.authBlock}>
+                        <Spinner/>
+                    </div>
                 </div>
-            )}
-            {isShown && <Toast message={toastMessage} />}
+            }
+            {isShown && <Toast message={toastMessage}/>}
         </div>
     );
 }

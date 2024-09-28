@@ -48,6 +48,7 @@ const FormFields: FC<FormFieldsProps> = (props) => {
                                 onBlur={handleChange}
                                 placeholder={field.label}
                                 name={field.name}
+                                id={field.name}
                                 type={field.type}
                             />
                             {currentValues[field.name] && !errors[field.name] && <Icon className={cls.successIcon}/>}
