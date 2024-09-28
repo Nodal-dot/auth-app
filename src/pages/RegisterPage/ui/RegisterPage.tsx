@@ -6,7 +6,7 @@ import {CurrentValues, FormData} from '../../../shared/types/register/types.ts'
 import RegisterSuccess from "../../../widgets/RegisterSuccess/ui/RegisterSuccess.tsx";
 import {RegisterForm} from "../../../widgets/RegisterForm";
 import Toast from "../../../shared/ui/Toast/Toast.tsx";
-import {getFormData, postFormData} from "../../../shared/api/register/register.ts";
+import {getFormData, postFormData} from "../../../shared/api/register.ts";
 
 
 

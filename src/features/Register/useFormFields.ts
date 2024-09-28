@@ -73,12 +73,14 @@ const useFormFields = (formData: FormData[], handleClick: (data:CurrentValues) =
     const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
         const { name, value } = event.target;
         const error = checkRequired(name, value);
+
         if (!error) {
             setErrors({ ...errors, [name]: '' });
         } else {
             setErrors({ ...errors, [name]: error });
         }
         setCurrentValues({ ...currentValues, [name]: value });
+        console.log(currentValues)
     };
 
     return { fields, errors, currentValues, selectValues, handleSubmit, handleChange, handleSelectChange };
